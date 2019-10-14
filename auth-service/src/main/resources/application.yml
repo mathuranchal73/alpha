@@ -1,0 +1,10 @@
+logging:
+  file: C:/Users/anchal.mathur/Desktop/Code/alpha/auth-service/logs/auth-service.log
+  path: ./logs
+  level:
+    LOG: ERROR
+server:
+  port: 8965
+spring:
+  application:
+    name: auth-service
