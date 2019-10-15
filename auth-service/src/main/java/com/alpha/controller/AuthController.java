@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
 @RestController
 public class AuthController {
 	
-	private static final Logger LOG = Logger.getLogger(AuthController.class.getName());
+	private static Logger logger = Logger.getLogger(AuthController.class);
 
 	@Autowired
 	RestTemplate restTemplete;
@@ -31,7 +32,7 @@ public class AuthController {
 	@RequestMapping(value = "/elk")
 	public String helloWorld() {
 		String response = "Welcome to JavaInUse" + new Date();
-		LOG.log(Level.INFO, response);
+		logger.info(response); 
 
 		return response;
 	}
@@ -43,13 +44,13 @@ public class AuthController {
 			throw new Exception("Exception has occured....");
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOG.error(e);
+			logger.error(e);
 
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
 			String stackTrace = sw.toString();
-			LOG.log(Level.ERROR,"Exception - " + stackTrace);
+			logger.error("Exception - " + stackTrace);
 			response = stackTrace;
 		}
 
