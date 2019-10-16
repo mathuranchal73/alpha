@@ -2,6 +2,8 @@ package com.alpha.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,6 +25,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 
 import com.alpha.model.audit.PersonDateAudit;
+import com.alpha.model.audit.UserDateAudit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModel;
@@ -38,14 +44,11 @@ import io.swagger.annotations.ApiModelProperty;
             }),
             @UniqueConstraint(columnNames = {
                 "email"
-            }),
-            @UniqueConstraint(columnNames = {
-                    "user_uuid"
-                })
+            })
     })
 @SequenceGenerator(name="seq", initialValue=000000, allocationSize=100)
 @ApiModel
-public class Person extends PersonDateAudit implements Serializable {
+public class Person extends UserDateAudit implements Serializable {
 	
 
 	private static final long serialVersionUID = 1L;
@@ -66,7 +69,6 @@ public class Person extends PersonDateAudit implements Serializable {
 	 private String lastName;
 	 
 	 @NaturalId
-	 @NotBlank
 	 @Size(max = 40)
 	 @Email
 	 @ApiModelProperty(notes = "Email ID of the User", required = true)
@@ -80,19 +82,14 @@ public class Person extends PersonDateAudit implements Serializable {
 	 @ApiModelProperty(notes = "10 Digit Unique Mobile No. of the User", required = false)
 	 private String mobileNo;
 	 
-	 @Size(max = 1)
 	 @ApiModelProperty(notes = "Gender of the User", required = false)
 	 private String gender;
-	 
-	 @OneToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "cd", nullable = false)
+	
 	 @ApiModelProperty(notes = "Code of Country of Residence of the User", required = true)
-	 private Country country_cd;
+	 private String country_cd;
 	 
-	 @OneToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "cd", nullable = false)
 	 @ApiModelProperty(notes = "Application Specific Code of Referring Source", required = true)
-	 private Source source_cd;
+	 private String source_cd;
 	 
 	 @JsonIgnore
 	 private Instant emailInsertedOn;
@@ -103,12 +100,20 @@ public class Person extends PersonDateAudit implements Serializable {
 	 @ApiModelProperty(notes = "The image URL of the product", required = false)
 	 private String profilePicture;
 	 
-	 @OneToOne(fetch = FetchType.LAZY, optional = false)
-	 @JoinColumn(name = "uuid", nullable = false)
 	 @ApiModelProperty(notes = "Application Specific UUID of User", required = true)
-	 private User user_uuid;
+	 private String user_uuid;
 	 
 	 
+
+	public Person(@NotBlank @Size(max = 40) String firstName, @NotBlank @Size(max = 40) String lastName,
+			String country_cd, String source_cd, String user_uuid) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.country_cd = country_cd;
+		this.source_cd = source_cd;
+		this.user_uuid = user_uuid;
+	}
 
 	public long getId() {
 		return id;
@@ -166,19 +171,19 @@ public class Person extends PersonDateAudit implements Serializable {
 		this.gender = gender;
 	}
 
-	public Country getCountry_cd() {
+	public String getCountry_cd() {
 		return country_cd;
 	}
 
-	public void setCountry_cd(Country country_cd) {
+	public void setCountry_cd(String country_cd) {
 		this.country_cd = country_cd;
 	}
 
-	public Source getSource_cd() {
+	public String getSource_cd() {
 		return source_cd;
 	}
 
-	public void setSource_cd(Source source_cd) {
+	public void setSource_cd(String source_cd) {
 		this.source_cd = source_cd;
 	}
 
@@ -207,11 +212,11 @@ public class Person extends PersonDateAudit implements Serializable {
 		this.profilePicture = profilePicture;
 	}
 
-	public User getUser_uuid() {
+	public String getUser_uuid() {
 		return user_uuid;
 	}
 
-	public void setUser_uuid(User user_uuid) {
+	public void setUser_uuid(String user_uuid) {
 		this.user_uuid = user_uuid;
 	}
 	 

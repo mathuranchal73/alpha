@@ -2,11 +2,17 @@ package com.alpha.model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
@@ -29,7 +35,7 @@ import io.swagger.annotations.ApiModelProperty;
             })
 })
 @ApiModel
-public class User extends UserDateAudit implements Serializable{
+public class User{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +59,10 @@ public class User extends UserDateAudit implements Serializable{
 	@NotNull
 	private boolean isActive;
 	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="user_roles",joinColumns=@JoinColumn(name="user_id"),inverseJoinColumns=@JoinColumn(name="role_id"))
+	private Set<Role> roles= new HashSet<>();
+	
 	@NotBlank
     @Size(max = 100)
     private String uuid;
@@ -60,6 +70,15 @@ public class User extends UserDateAudit implements Serializable{
 	private int loginRetryCount;
 
 	
+	
+	public User(@NotBlank @Size(max = 25) String username, @NotBlank @Size(max = 100) String password,
+			 @NotBlank @Size(max = 100) String uuid) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.uuid = uuid;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -106,6 +125,15 @@ public class User extends UserDateAudit implements Serializable{
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
+	}
+	
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public String getUuid() {

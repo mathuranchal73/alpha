@@ -1,0 +1,47 @@
+INFO  | 2019-10-16 10:58:45 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 10:59:56 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 11:01:17 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 11:03:21 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 11:04:03 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 11:12:04 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:01:13 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:01:53 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:05:34 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:08:55 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:11:45 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:13:27 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:20:23 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 12:23:18 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:70) - User Successfully Saved
+INFO  | 2019-10-16 12:41:59 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+DEBUG | 2019-10-16 12:42:13 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:56) - 28e2fedc-c815-4191-97f0-8a805ca3ed37:Username is already taken
+INFO  | 2019-10-16 12:42:39 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:74) - d30e6c38-820b-47ae-ada1-a5ac85056699:User Successfully Saved
+DEBUG | 2019-10-16 12:46:24 | [http-nio-9991-exec-5] service.UserServiceImpl (UserServiceImpl.java:56) - 0d816eeb-fbc3-4d70-9d74-02da83088c82:Username is already taken
+DEBUG | 2019-10-16 12:46:30 | [http-nio-9991-exec-6] service.UserServiceImpl (UserServiceImpl.java:56) - c3f34878-3b9d-43e5-8a02-0a1fa981532e:Username is already taken
+INFO  | 2019-10-16 12:46:36 | [http-nio-9991-exec-8] service.UserServiceImpl (UserServiceImpl.java:74) - 94c40a3d-548c-44e8-8bb3-a78439e80cbd:User Successfully Saved
+DEBUG | 2019-10-16 12:48:17 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:56) - c30b96a9-b98c-41f7-821e-3167378e4574:Username is already taken
+INFO  | 2019-10-16 12:51:16 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:74) - 4c8b44ae-c428-41fd-b46e-7d7e65d566b0:User Successfully Saved
+INFO  | 2019-10-16 12:51:35 | [http-nio-9991-exec-4] service.UserServiceImpl (UserServiceImpl.java:74) - 309e0001-d4bf-4a16-ba92-4445149bc33a:User Successfully Saved
+INFO  | 2019-10-16 14:40:21 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:41:46 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:47:26 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:49:09 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:49:54 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:50:47 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+DEBUG | 2019-10-16 14:50:58 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:62) - 9bf34593-e7d1-47c4-ae60-647274176f42:Username is already taken
+INFO  | 2019-10-16 14:53:54 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:54:05 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:55:29 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 14:58:24 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 15:01:37 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 15:02:38 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:78) - c0c9efa7-b25c-4d3e-adb2-74b6337a9241:User Successfully Saved
+INFO  | 2019-10-16 15:04:18 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+DEBUG | 2019-10-16 15:04:28 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:63) - 11371deb-c729-4556-acc4-add1e7f40722:Username is already taken
+INFO  | 2019-10-16 15:04:34 | [http-nio-9991-exec-3] service.UserServiceImpl (UserServiceImpl.java:78) - 84682813-8ae7-44b2-8a26-4a3a0c1ecc9b:User Successfully Saved
+INFO  | 2019-10-16 15:06:25 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+DEBUG | 2019-10-16 15:06:34 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:63) - ef50be44-509a-453c-a2a7-e94a4fedf118:Username is already taken
+INFO  | 2019-10-16 15:06:39 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:78) - ba6b0f02-5c2a-45ae-ac00-f3efbf27f041:User Successfully Saved
+INFO  | 2019-10-16 15:10:17 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 15:10:28 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:78) - 60bdee4e-187d-4586-a40f-2fc629d81601:User Successfully Saved
+INFO  | 2019-10-16 15:10:28 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:89) - 60bdee4e-187d-4586-a40f-2fc629d81601:Default Profile Successfully Saved
+INFO  | 2019-10-16 15:21:49 | [main] alpha.UserServiceApplication (UserServiceApplication.java:15) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-16 15:21:58 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:79) - 8bffb2c8-9a9f-4d20-8ae1-f4f0116b9c72:User Successfully Saved
