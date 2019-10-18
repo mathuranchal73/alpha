@@ -22,12 +22,15 @@ import com.alpha.model.Person;
 import com.alpha.model.Role;
 import com.alpha.model.RoleName;
 import com.alpha.model.User;
+import com.alpha.payload.AddStudentRequest;
 import com.alpha.payload.SignUpRequest;
 import com.alpha.repository.PersonRepository;
 import com.alpha.repository.RoleRepository;
 import com.alpha.repository.UserRepository;
 import com.alpha.web.ApiResponse;
 import com.alpha.web.RequestCorrelation;
+import com.alpha.web.client.RestClient;
+import com.netflix.client.http.HttpResponse;
 import com.sms.event.OnRegistrationSuccessEvent;
 
 @Service
@@ -41,9 +44,11 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	RoleRepository roleRepository;
 	
-
 	@Autowired
     PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	RestClient restClient;
 
 	@SuppressWarnings("unlikely-arg-type")
 	@Override
@@ -79,6 +84,7 @@ public class UserServiceImpl implements IUserService {
 							if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_TEACHER))
 							{
 								String appUrl = request.getContextPath();
+								//restClient.postStudentService(student)
 
 								Person person= new Person("Guest", "User",request.getHeader("CountryCD"),request.getHeader("SourceAppCD"),result.getUuid());
 								person.setCreatedBy(1L);
@@ -100,13 +106,11 @@ public class UserServiceImpl implements IUserService {
 							}
 							else if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_ADMIN))
 							{
-								Person person= new Person("Guest", "User",request.getHeader("CountryCD"),request.getHeader("SourceAppCD"),result.getUuid());
-								person.setCreatedBy(1L);
-								Instant timestamp = Instant.now();
-								person.setRegisteredAt(timestamp);
-								person.setLastModifiedAt(timestamp);
+								
+							
 								
 									try {
+											String response=restClient.postStudentService(request,result);
 											personRepository.save(person);
 											logger.info(correlationId+":"+ "Default Profile Successfully Saved");	
 										} 

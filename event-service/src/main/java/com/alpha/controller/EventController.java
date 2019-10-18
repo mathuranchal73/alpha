@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alpha.model.User;
 import com.alpha.service.IEventService;
 
 import io.swagger.annotations.Api;
@@ -24,9 +25,9 @@ public class EventController {
 	
 	
 	@RequestMapping(value = "/addStudentProfile", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> addStudentProfile() throws Exception 
+    public ResponseEntity<?> addStudentProfile(HttpServletRequest request,User user) throws Exception 
     {
-    	return eventService.addStudentProfile();
+    	return eventService.addStudentProfile(request,user);
     }
 
 }
