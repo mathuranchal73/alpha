@@ -3,7 +3,6 @@ package com.alpha.model.audit;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
@@ -16,37 +15,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(
-        value = {"registeredAt", "lastModifiedAt"},
+        value = {"createdAt", "updatedAt"},
         allowGetters = true
 )
-public abstract class PersonDateAudit implements Serializable {
-	
+public abstract class DateAudit implements Serializable {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-
 	@CreatedDate
-    @Column(nullable = true, updatable = false)
-    private Instant registeredAt;
-	
+	private Instant createdAt;
 	@LastModifiedDate
-    @Column(nullable = true)
-    private Instant lastModifiedAt;
-
-	public Instant getRegisteredAt() {
-		return registeredAt;
+	private Instant updatedAt;
+	
+	
+	
+	public Instant getCreatedAt() {
+		return createdAt;
 	}
-
-	public void setRegisteredAt(Instant registeredAt) {
-		this.registeredAt = registeredAt;
+	public void setCreatedAt(Instant createdAt) {
+		this.createdAt = createdAt;
 	}
-
-	public Instant getLastModifiedAt() {
-		return lastModifiedAt;
+	public Instant getUpdatedAt() {
+		return updatedAt;
 	}
-
-	public void setLastModifiedAt(Instant lastModifiedAt) {
-		this.lastModifiedAt = lastModifiedAt;
+	public void setUpdatedAt(Instant updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 	
 	
-
 }

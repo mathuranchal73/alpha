@@ -1,6 +1,7 @@
 package com.alpha.model.audit;
 
 import javax.persistence.MappedSuperclass;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 
@@ -11,16 +12,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
         value = {"createdBy", "updatedBy"},
         allowGetters = true
 )
-public class UserDateAudit extends PersonDateAudit {
-
+public abstract class UserDateAudit extends DateAudit {
 	
+	 /**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	@CreatedBy
 	private Long CreatedBy;
-	 
-	@LastModifiedBy
+	 @LastModifiedBy
 	private Long Updatedby;
 	 
 	 
@@ -36,4 +36,8 @@ public class UserDateAudit extends PersonDateAudit {
 	public void setUpdatedby(Long updatedby) {
 		Updatedby = updatedby;
 	}
+	 
+	 
+	 
+
 }

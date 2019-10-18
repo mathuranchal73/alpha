@@ -28,6 +28,7 @@ import com.alpha.repository.RoleRepository;
 import com.alpha.repository.UserRepository;
 import com.alpha.web.ApiResponse;
 import com.alpha.web.RequestCorrelation;
+import com.sms.event.OnRegistrationSuccessEvent;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -40,9 +41,7 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	RoleRepository roleRepository;
 	
-	@Autowired
-	PersonRepository personRepository;
-	
+
 	@Autowired
     PasswordEncoder passwordEncoder;
 
@@ -79,6 +78,8 @@ public class UserServiceImpl implements IUserService {
 						logger.info(correlationId+":"+ "User Successfully Saved");	
 							if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_TEACHER))
 							{
+								String appUrl = request.getContextPath();
+
 								Person person= new Person("Guest", "User",request.getHeader("CountryCD"),request.getHeader("SourceAppCD"),result.getUuid());
 								person.setCreatedBy(1L);
 								Instant timestamp = Instant.now();
