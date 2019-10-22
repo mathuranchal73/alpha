@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.alpha.model.Student;
 import com.alpha.model.User;
 import com.alpha.payload.AuthRequest;
 import com.alpha.payload.AuthResponse;
@@ -95,7 +94,8 @@ public class RestClientImpl implements RestClient {
 			String url = "http://"+instanceInfo.getIPAddr()+ ":"+instanceInfo.getPort()+"/v1/event/";
 			try {
 				ResponseEntity<ApiResponse> json = restTemplate.exchange(url,HttpMethod.POST, entity, ApiResponse.class);
-				return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Posted User details to Event Service"),HttpStatus.OK);
+				logger.info(correlationId+":"+"Posted User details to Event Service");
+				return json;
 				 
 			} catch (RestClientException e) 
 			{

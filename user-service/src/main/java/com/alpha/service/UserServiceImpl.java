@@ -1,9 +1,7 @@
 package com.alpha.service;
 
 
-import java.time.Instant;
 import java.util.Collections;
-import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +16,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.alpha.exception.AppException;
-import com.alpha.model.Person;
 import com.alpha.model.Role;
 import com.alpha.model.RoleName;
 import com.alpha.model.User;
-import com.alpha.payload.AddStudentRequest;
 import com.alpha.payload.SignUpRequest;
-import com.alpha.repository.PersonRepository;
 import com.alpha.repository.RoleRepository;
 import com.alpha.repository.UserRepository;
 import com.alpha.web.ApiResponse;
 import com.alpha.web.RequestCorrelation;
 import com.alpha.web.client.RestClient;
-import com.netflix.client.http.HttpResponse;
-import com.sms.event.OnRegistrationSuccessEvent;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -81,20 +74,14 @@ public class UserServiceImpl implements IUserService {
 				        user.setRoles(Collections.singleton(userRole));
 						User result = userRepository.save(user);
 						logger.info(correlationId+":"+ "User Successfully Saved");	
-							if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_TEACHER))
+							if(result.getRoles().stream().map(role->role.getName().equals("ROLE_SYSTEM")) != null)
 							{
-								String appUrl = request.getContextPath();
-								//restClient.postStudentService(student)
-
-								Person person= new Person("Guest", "User",request.getHeader("CountryCD"),request.getHeader("SourceAppCD"),result.getUuid());
-								person.setCreatedBy(1L);
-								Instant timestamp = Instant.now();
-								person.setRegisteredAt(timestamp);
-								person.setLastModifiedAt(timestamp);
 								
 									try {
-											personRepository.save(person);
-											logger.info(correlationId+":"+ "Default Profile Successfully Saved");	
+											restClient.postStudentService(request,result);
+											logger.info(correlationId+":"+ "Passed Student ADD Event to EventService");
+											return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Passed Student ADD Event to EventService"),
+								                    HttpStatus.INTERNAL_SERVER_ERROR);
 										} 
 									catch (Exception e)
 										{
@@ -107,23 +94,20 @@ public class UserServiceImpl implements IUserService {
 							else if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_ADMIN))
 							{
 								
-							
-								
-									try {
-											String response=restClient.postStudentService(request,result);
-											personRepository.save(person);
-											logger.info(correlationId+":"+ "Default Profile Successfully Saved");	
-										} 
-									catch (Exception e)
-										{
-											logger.error(correlationId+":"+ e);
-											return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
-								                    HttpStatus.INTERNAL_SERVER_ERROR);
-										}
+								try {
+									restClient.postStudentService(request,result);
+									logger.info(correlationId+":"+ "Default Profile Successfully Saved");	
+								} 
+							catch (Exception e)
+								{
+									logger.error(correlationId+":"+ e);
+									return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
+						                    HttpStatus.INTERNAL_SERVER_ERROR);
+								}
 									
 							}
-							return new ResponseEntity<ApiResponse>(new ApiResponse(true, "User and Default Profile Successfully Saved"),
-				                    HttpStatus.OK);
+							return new ResponseEntity<ApiResponse>(new ApiResponse(false, "User Successfully Saved but Event could not be passed"),
+										HttpStatus.OK);
 					} 
 				catch (Exception e) 
 						{

@@ -14,7 +14,7 @@ public class ModelMapper {
 	
 	private static Logger logger = Logger.getLogger(ModelMapper.class);
 	
-	public static Student mapUserObjecttoStudent(HttpServletRequest request, User user) {
+	public Student mapUserObjecttoStudent(HttpServletRequest request, User user) {
 		
 		Student	student = new Student();
 		student.setFirstName("Guest");
