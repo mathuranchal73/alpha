@@ -35,7 +35,7 @@ public class UserController {
 	
 	@ApiOperation(value="Add", notes="Registers the user", nickname="saveUser")
 	@ApiResponses(value = {
-	        @ApiResponse(code = 200, message = "Successfully retrieved list"),
+	        @ApiResponse(code = 200, message = "Successfully Registered"),
 	        @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 	        @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 	        @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
@@ -44,7 +44,7 @@ public class UserController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUser(HttpServletRequest request, @Valid @RequestBody SignUpRequest signUpRequest) throws Exception 
     {
-    	return userService.addUser(request.getHeader("SourceAppCD"),signUpRequest);
+    	return userService.addUser(request,signUpRequest);
     }
 
 }

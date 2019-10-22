@@ -1,5 +1,6 @@
 package com.alpha.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,6 @@ import com.alpha.payload.SignUpRequest;
 @Service
 public interface IUserService {
 
-	ResponseEntity<?> addUser(String header, @Valid SignUpRequest signUpRequest);
+	ResponseEntity<?> addUser(HttpServletRequest request, @Valid SignUpRequest signUpRequest);
 
 }

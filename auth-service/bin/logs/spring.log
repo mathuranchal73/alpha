@@ -1,0 +1,12 @@
+2019-10-15 11:37:21.278  INFO 17656 --- [main] com.alpha.AuthServiceApplication         : Starting AuthServiceApplication on BOLD-AnchalM with PID 17656 (C:\Users\anchal.mathur\Desktop\Code\alpha\auth-service\target\classes started by Anchal.Mathur in C:\Users\anchal.mathur\Desktop\Code\alpha\auth-service)
+2019-10-15 11:37:21.281  INFO 17656 --- [main] com.alpha.AuthServiceApplication         : No active profile set, falling back to default profiles: default
+2019-10-15 11:37:21.901  INFO 17656 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8965 (http)
+2019-10-15 11:37:21.920  INFO 17656 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-10-15 11:37:21.921  INFO 17656 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.26]
+2019-10-15 11:37:22.000  INFO 17656 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-10-15 11:37:22.001  INFO 17656 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 695 ms
+2019-10-15 11:37:22.151  INFO 17656 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-10-15 11:37:22.262  INFO 17656 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8965 (http) with context path ''
+2019-10-15 11:37:22.264  INFO 17656 --- [main] com.alpha.AuthServiceApplication         : Started AuthServiceApplication in 1.266 seconds (JVM running for 1.804)
+2019-10-15 11:38:00.682  INFO 17656 --- [RMI TCP Connection(8)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2019-10-15 11:38:00.685  INFO 17656 --- [RMI TCP Connection(8)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
