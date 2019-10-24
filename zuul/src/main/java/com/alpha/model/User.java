@@ -69,6 +69,12 @@ public class User{
 
 	
 	
+	
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public User(@NotBlank @Size(max = 25) String username, @NotBlank @Size(max = 100) String password,
 			 @NotBlank @Size(max = 100) String uuid) {
 		super();

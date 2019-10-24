@@ -1,6 +1,7 @@
 package com.alpha.security;
 
 import java.io.IOException;
+import java.util.UUID;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -17,6 +18,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.alpha.web.RequestCorrelation;
+
 public class JWTAuthenticationFilter extends OncePerRequestFilter {
 	
 	 @Autowired
@@ -30,6 +33,17 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		
+        String currentCorrId = request.getHeader(RequestCorrelation.CORRELATION_ID_HEADER);
+
+        if (currentCorrId == null) {
+            currentCorrId = UUID.randomUUID().toString();
+            logger.info("No correlationId found in Header. Generated : " + currentCorrId);
+        } else {
+            logger.info("Found correlationId in Header : " + currentCorrId);
+        }
+
+        RequestCorrelation.setId(currentCorrId);
 	
 		try {
 			String jwt= getJwtFromRequest(request);
@@ -42,6 +56,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 				
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
+			
+			logger.info("Passing request without Authentication Header");
 			
 		}catch (Exception ex) {
             logger.error("Could not set user authentication in security context", ex);
@@ -57,7 +73,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         	logger.info("Bearer Token Passed:"+bearerToken);
             return bearerToken;
         }
-        logger.error("Could Not extract bearer token from request");
         return null;
     }
+
 }

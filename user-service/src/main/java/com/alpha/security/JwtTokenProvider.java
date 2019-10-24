@@ -1,7 +1,6 @@
 package com.alpha.security;
 
 import java.util.Base64;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 

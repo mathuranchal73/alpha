@@ -1,1 +1,1 @@
-ERROR | 2019-10-22 15:04:28 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:114) - e3db3a98-0ac1-4e63-8cc3-b1a1819a631f:org.springframework.orm.jpa.JpaSystemException: could not execute statement; nested exception is org.hibernate.exception.GenericJDBCException: could not execute statement
+ERROR | 2019-10-24 16:37:39 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:88) - 25c112bf-f661-46ad-bdfa-c04345b64e4b:java.lang.NullPointerException

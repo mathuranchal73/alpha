@@ -3,6 +3,9 @@ package com.alpha.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -32,7 +35,7 @@ public class AuthServiceImpl implements IAuthService {
 		try {
 			Authentication authentication = authenticationManager.authenticate(
 	                 new UsernamePasswordAuthenticationToken(
-	                         loginRequest.getUsernameOrEmail(),
+	                         loginRequest.getUsername(),
 	                         loginRequest.getPassword()
 	                 )
 	         );
@@ -42,8 +45,14 @@ public class AuthServiceImpl implements IAuthService {
         		 return(new JwtAuthenticationResponse(jwt));
         	 
              
-		} catch (AuthenticationException e) {
-            throw new CustomZuulException("Invalid username or password.", HttpStatus.UNAUTHORIZED);
+		} catch (DisabledException d) {
+            throw new CustomZuulException("Account Disabled", HttpStatus.UNAUTHORIZED);
+		}
+		catch ( LockedException l) {
+            throw new CustomZuulException("Account Locked", HttpStatus.UNAUTHORIZED);
+		}
+		catch ( BadCredentialsException e) {
+            throw new CustomZuulException("Invalid Username or Password", HttpStatus.UNAUTHORIZED);
 		}
         }
 

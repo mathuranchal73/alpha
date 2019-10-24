@@ -5,28 +5,28 @@ import javax.validation.constraints.NotBlank;
 public class AuthRequest {
 	
 	@NotBlank
-    private String usernameOrEmail;
+    private String username;
 
     @NotBlank
     private String password;
     
-    
-
-    public AuthRequest(@NotBlank String usernameOrEmail, @NotBlank String password) {
+   
+    public AuthRequest(@NotBlank String username, @NotBlank String password) {
 		super();
-		this.usernameOrEmail = usernameOrEmail;
+		this.username = username;
 		this.password = password;
 	}
+    
 
-	public String getUsernameOrEmail() {
-        return usernameOrEmail;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsernameOrEmail(String usernameOrEmail) {
-        this.usernameOrEmail = usernameOrEmail;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
+	public String getPassword() {
         return password;
     }
 

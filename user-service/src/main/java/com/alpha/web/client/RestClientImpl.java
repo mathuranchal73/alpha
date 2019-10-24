@@ -71,7 +71,7 @@ public class RestClientImpl implements RestClient {
 				 
 			} catch (RestClientException e) 
 			{
-				logger.error(correlationId+":" +"Zuul Error"+e.getStackTrace());
+				logger.error(correlationId+":" +"Zuul Error"+e.getMessage());
 				return null;
 			}
 		
