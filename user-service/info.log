@@ -98,3 +98,10 @@ DEBUG | 2019-10-24 16:32:24 | [http-nio-9991-exec-1] service.UserServiceImpl (Us
 INFO  | 2019-10-24 16:32:30 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:76) - 1aa1f9fa-7b73-4411-a267-b2a26032364c:User Successfully Saved
 INFO  | 2019-10-24 16:33:27 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
 INFO  | 2019-10-24 16:34:33 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:76) - 25c112bf-f661-46ad-bdfa-c04345b64e4b:User Successfully Saved
+INFO  | 2019-10-24 17:02:38 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-24 17:03:19 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:76) - 01aebf29-5b84-4e83-b36c-b1344457e7ac:User Successfully Saved
+INFO  | 2019-10-24 17:05:43 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-24 17:06:13 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:76) - 6d139a02-800e-477b-b927-59c2c3606bbf:User Successfully Saved
+INFO  | 2019-10-24 17:22:52 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:82) - 6d139a02-800e-477b-b927-59c2c3606bbf:Passed Student ADD Event to EventService
+INFO  | 2019-10-24 17:23:21 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:76) - 5e775dbc-bd5c-4623-92dd-ac8491e23805:User Successfully Saved
+INFO  | 2019-10-24 17:24:36 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:82) - 5e775dbc-bd5c-4623-92dd-ac8491e23805:Passed Student ADD Event to EventService

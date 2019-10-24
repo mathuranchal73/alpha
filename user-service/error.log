@@ -1,1 +1,2 @@
-ERROR | 2019-10-24 16:37:39 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:88) - 25c112bf-f661-46ad-bdfa-c04345b64e4b:java.lang.NullPointerException
+ERROR | 2019-10-24 17:22:47 | [http-nio-9991-exec-1] client.RestClientImpl (RestClientImpl.java:102) - 6d139a02-800e-477b-b927-59c2c3606bbf:Error returning Student Object[Ljava.lang.StackTraceElement;@428c56cc
+ERROR | 2019-10-24 17:24:16 | [http-nio-9991-exec-2] client.RestClientImpl (RestClientImpl.java:102) - 5e775dbc-bd5c-4623-92dd-ac8491e23805:Error returning Student Object[Ljava.lang.StackTraceElement;@5033079c
