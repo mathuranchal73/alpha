@@ -79,7 +79,7 @@ public class RestClientImpl implements RestClient {
 	
 
 	@Override
-	public ResponseEntity<ApiResponse> postStudentService(HttpServletRequest request,User result)
+	public ResponseEntity<?> postStudentService(HttpServletRequest request,User result)
 	{
 		 String correlationId = RequestCorrelation.getId();
 		 HttpHeaders httpHeaders = new HttpHeaders();
@@ -93,7 +93,7 @@ public class RestClientImpl implements RestClient {
 		 InstanceInfo instanceInfo = application.getInstances().get(0);
 			String url = "http://"+instanceInfo.getIPAddr()+ ":"+instanceInfo.getPort()+"/v1/event/";
 			try {
-				ResponseEntity<ApiResponse> json = restTemplate.exchange(url,HttpMethod.POST, entity, ApiResponse.class);
+				ResponseEntity<?> json = restTemplate.exchange(url,HttpMethod.POST, entity, String.class);
 				logger.info(correlationId+":"+"Posted User details to Event Service");
 				return json;
 				 

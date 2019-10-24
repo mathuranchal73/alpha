@@ -56,9 +56,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 				
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
-			
+			else {
 			logger.info("Passing request without Authentication Header");
-			
+			}
 		}catch (Exception ex) {
             logger.error("Could not set user authentication in security context", ex);
             }

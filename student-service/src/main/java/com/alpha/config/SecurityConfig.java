@@ -97,7 +97,7 @@ http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFi
 	}
 	
 	 @Override
-	    public void configure(WebSecurity web) throws Exception {
+	    public void configure(WebSecurity web) {
 	    	// Allow eureka client and Swagger to be accessed without authentication
 	        web.ignoring().antMatchers("/*/","/eureka/**","/v2/api-docs",
 	                                   "/configuration/ui",

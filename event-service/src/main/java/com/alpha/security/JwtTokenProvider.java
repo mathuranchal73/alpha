@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alpha.security.JwtTokenProvider;
-
+import com.alpha.util.RedisUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -24,10 +24,8 @@ public class JwtTokenProvider {
 	
 private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-private static final String AUTH="auth";
-private static final String AUTHORIZATION="Authorization";
-
 private static final String REDIS_SET_ACTIVE_SUBJECTS = "active-subjects";
+	
 	
 	@Value("${app.jwtSecret}")
     private String jwtSecret;
@@ -55,7 +53,14 @@ private static final String REDIS_SET_ACTIVE_SUBJECTS = "active-subjects";
     public boolean validateToken(String authToken) {
         try {
         	Claims claims =Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody();
-        	
+        	 if (RedisUtil.INSTANCE.sismember(REDIS_SET_ACTIVE_SUBJECTS, claims.getSubject())) {
+                 return true;
+             }
+        	 else
+        	 {
+        		 logger.error("JWT Token not present in Redis Cache");
+        		  return false;
+        	 }
 
         } catch (SignatureException ex) {
             logger.error("Invalid JWT signature");
