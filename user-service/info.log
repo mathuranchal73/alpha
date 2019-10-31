@@ -122,3 +122,12 @@ INFO  | 2019-10-25 00:42:16 | [http-nio-9991-exec-10] service.UserServiceImpl (U
 INFO  | 2019-10-25 00:42:37 | [http-nio-9991-exec-10] service.UserServiceImpl (UserServiceImpl.java:82) - 6d8db8a5-95a7-4fcb-be08-eb5bcc5d8586:Passed Student ADD Event to EventService
 INFO  | 2019-10-25 00:47:35 | [http-nio-9991-exec-9] service.UserServiceImpl (UserServiceImpl.java:76) - 1bd06b79-b39b-455a-846b-17d49aacfdd0:User Successfully Saved
 INFO  | 2019-10-25 00:49:01 | [http-nio-9991-exec-9] service.UserServiceImpl (UserServiceImpl.java:82) - 1bd06b79-b39b-455a-846b-17d49aacfdd0:Passed Student ADD Event to EventService
+INFO  | 2019-10-31 11:44:33 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-31 11:52:57 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-31 11:53:23 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:100) - 4bc5cb43-49de-4832-9289-14ad837cea40:Passed Student ADD Event to EventService
+DEBUG | 2019-10-31 12:00:14 | [http-nio-9991-exec-3] service.UserServiceImpl (UserServiceImpl.java:65) - 3ed5b046-029a-40a2-9bb9-10de5c10ce83:Username is already taken
+INFO  | 2019-10-31 12:00:20 | [http-nio-9991-exec-4] service.UserServiceImpl (UserServiceImpl.java:100) - b163b180-8ee2-45c4-989b-2ccd4bd413bd:Passed Student ADD Event to EventService
+INFO  | 2019-10-31 14:53:00 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-31 14:54:02 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:101) - f66750d8-768a-4f22-8173-46391f6ba1ed:Passed Student ADD Event to EventService
+INFO  | 2019-10-31 14:58:04 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
+INFO  | 2019-10-31 14:58:34 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:101) - ba0f32a2-bf45-4c8e-987c-f059b54662d2:Passed Student ADD Event to EventService

@@ -1,6 +1,5 @@
 package com.alpha.model;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -76,6 +75,10 @@ public class User{
 		this.username = username;
 		this.password = password;
 		this.uuid = uuid;
+	}
+
+	public User() {
+	
 	}
 
 	public Long getId() {

@@ -3,6 +3,11 @@ package com.alpha.service;
 
 import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -67,30 +72,44 @@ public class UserServiceImpl implements IUserService {
 		  Role userRole = roleRepository.findByName(RoleName.ROLE_SYSTEM)
 	                .orElseThrow(() -> new AppException("User Role not set."));
 
-				try {
-						//Initially setting the user to InActive
-						user.setActive(false);
-						//Initially setting the user to InActive
-				        user.setRoles(Collections.singleton(userRole));
-						User result = userRepository.save(user);
-						logger.info(correlationId+":"+ "User Successfully Saved");	
-							if(result.getRoles().stream().map(role->role.getName().equals("ROLE_SYSTEM")) != null)
-							{
-								
-									try {
-											restClient.postStudentService(request,result);
-											logger.info(correlationId+":"+ "Passed Student ADD Event to EventService");
-											return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Passed Student ADD Event to EventService"),
-								                    HttpStatus.INTERNAL_SERVER_ERROR);
-										} 
-									catch (Exception e)
-										{
-											logger.error(correlationId+":"+ e);
-											return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
-								                    HttpStatus.INTERNAL_SERVER_ERROR);
-										}
-									
-							}
+		  try {
+				//Initially setting the user to InActive
+				user.setActive(false);
+				//Initially setting the user to InActive
+		        user.setRoles(Collections.singleton(userRole));
+		        
+		        ExecutorService executor= Executors.newFixedThreadPool(3);
+		        
+		        Callable<User> task= ()->{
+					
+					return userRepository.save(user);
+					
+				};
+				Future<User> future= executor.submit(task);
+				User result= new User();
+				if(future.isDone())
+				{
+					logger.info(correlationId+":"+ "User Successfully Saved");	
+					result=future.get(4,TimeUnit.SECONDS);
+				}
+				
+					if(result.getRoles().stream().map(role->role.getName().equals("ROLE_SYSTEM")) != null)
+					{
+						
+							try {
+									restClient.postStudentService(request,result);
+									logger.info(correlationId+":"+ "Passed Student ADD Event to EventService");
+									return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Passed Student ADD Event to EventService"),
+						                    HttpStatus.INTERNAL_SERVER_ERROR);
+								} 
+							catch (Exception e)
+								{
+									logger.error(correlationId+":"+ e);
+									return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
+						                    HttpStatus.INTERNAL_SERVER_ERROR);
+								}
+							
+					}
 							else if(result!=null && result.getRoles().stream().equals(RoleName.ROLE_ADMIN))
 							{
 								

@@ -1,5 +1,10 @@
 package com.alpha.web.client;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -11,6 +16,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -52,7 +58,8 @@ public class RestClientImpl implements RestClient {
 	@Value("${system.password")
 	private final String systemPassword="123456";
 	
-	private String getToken(String systemUserId, String systemPassword) {
+	@Async("asyncExecutor")
+	private CompletableFuture<String> getToken(String systemUserId, String systemPassword) throws InterruptedException {
 		
 		 AuthRequest authRequest= new AuthRequest(systemUserId,systemPassword);
 		 String correlationId = RequestCorrelation.getId();
@@ -67,19 +74,19 @@ public class RestClientImpl implements RestClient {
 			ResponseEntity<AuthResponse> json;
 			try {
 					json = restTemplate.exchange(url,HttpMethod.POST, entity, AuthResponse.class);
-					return json.getBody().getAccessToken();
+					return CompletableFuture.completedFuture(json.getBody().getAccessToken());
 				 
 			} catch (RestClientException e) 
 			{
 				logger.error(correlationId+":" +"Zuul Error"+e.getMessage());
-				return null;
+				return CompletableFuture.completedFuture(e.getMessage());
 			}
 		
 	}
 	
 
 	@Override
-	public ResponseEntity<?> postStudentService(HttpServletRequest request,User result)
+	public ResponseEntity<?> postStudentService(HttpServletRequest request,User result) throws InterruptedException, ExecutionException, TimeoutException
 	{
 		 String correlationId = RequestCorrelation.getId();
 		 HttpHeaders httpHeaders = new HttpHeaders();
@@ -87,7 +94,7 @@ public class RestClientImpl implements RestClient {
 	     httpHeaders.set("CountryCD", request.getHeader("CountryCD"));
 	     httpHeaders.set("SourceAppCD", request.getHeader("SourceAppCD"));
 	     httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-	     httpHeaders.set("Authorization", getToken(systemUserId,systemPassword));
+	     httpHeaders.set("Authorization", getToken(systemUserId,systemPassword).get(10,TimeUnit.SECONDS));
 	     HttpEntity<User> entity = new HttpEntity<User>(result,httpHeaders);
 		 Application application = eurekaClient.getApplication(eventServiceServiceId);
 		 InstanceInfo instanceInfo = application.getInstances().get(0);

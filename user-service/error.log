@@ -1,10 +1,1 @@
-ERROR | 2019-10-24 23:48:42 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:88) - d8c6c4f2-6b7c-4ca5-a86b-e73f66526333:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-ERROR | 2019-10-24 23:57:39 | [http-nio-9991-exec-3] client.RestClientImpl (RestClientImpl.java:102) - 366de54c-fe4a-47f1-9825-c4d51c1bff11:Error returning Student Object[Ljava.lang.StackTraceElement;@28d1aebc
-ERROR | 2019-10-25 00:13:06 | [http-nio-9991-exec-2] service.UserServiceImpl (UserServiceImpl.java:88) - cb4f8ec8-ed75-4a78-911f-2f59b32429c3:java.lang.NullPointerException
-ERROR | 2019-10-25 00:15:07 | [http-nio-9991-exec-4] client.RestClientImpl (RestClientImpl.java:102) - 903e32e3-077b-436c-bd69-a0067224d9c3:Error returning Student Object[Ljava.lang.StackTraceElement;@3e2d8035
-ERROR | 2019-10-25 00:20:01 | [http-nio-9991-exec-5] client.RestClientImpl (RestClientImpl.java:102) - 1121867d-3184-4d89-8fc5-9587d07668e0:Error returning Student Object[Ljava.lang.StackTraceElement;@3e2b77bf
-ERROR | 2019-10-25 00:33:19 | [http-nio-9991-exec-7] client.RestClientImpl (RestClientImpl.java:102) - 8d3886e7-9d29-493c-bb00-a18661c83e5f:Error returning Student Object[Ljava.lang.StackTraceElement;@3a437176
-ERROR | 2019-10-25 00:36:59 | [http-nio-9991-exec-6] service.UserServiceImpl (UserServiceImpl.java:88) - 5d86f202-2aac-47d6-869d-d562bed7f90b:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-ERROR | 2019-10-25 00:41:46 | [http-nio-9991-exec-8] service.UserServiceImpl (UserServiceImpl.java:88) - 7947bf56-0e76-4086-b4c7-ebe698cad3ae:java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-ERROR | 2019-10-25 00:42:37 | [http-nio-9991-exec-10] client.RestClientImpl (RestClientImpl.java:102) - 6d8db8a5-95a7-4fcb-be08-eb5bcc5d8586:Error returning Student Object[Ljava.lang.StackTraceElement;@7322b8f
-ERROR | 2019-10-25 00:49:01 | [http-nio-9991-exec-9] client.RestClientImpl (RestClientImpl.java:102) - 1bd06b79-b39b-455a-846b-17d49aacfdd0:Error returning Student Object[Ljava.lang.StackTraceElement;@6b40f966
+ERROR | 2019-10-31 14:58:34 | [http-nio-9991-exec-1] client.RestClientImpl (RestClientImpl.java:109) - ba0f32a2-bf45-4c8e-987c-f059b54662d2:Error returning Student Object[Ljava.lang.StackTraceElement;@fbf64ca
