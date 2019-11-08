@@ -1,0 +1,113 @@
+app:
+  jwtExpirationInMs: 604800000
+  jwtSecret: JWTSuperSecretKey
+eureka:
+client:
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+        prefer-ip-address: true
+        health-check-url-path: /actuator/health
+        leaseExpirationDurationInSeconds: 2
+        leaseRenewalIntervalInSeconds: 5
+ribbon:
+    eureka:
+        enabled: true
+    ConnectTimeout: 60000
+    ReadTimeout: 60000
+logging:
+  file: ${logging.path}/${spring.application.name}.log
+  path: ./logs
+  level: DEBUG
+management:
+ endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  security:
+    enabled: true
+security:
+  basic:
+    enable: true
+server:
+  port: 8086
+spring:
+spring:
+  application:
+    name: zuul
+  boot:
+    admin:
+      client:
+        password: 4c075273-22c0-4cff-8840-cf569b6bea0e
+        url: http://localhost:8761/admin
+        username: user
+  datasource:
+    initialization-mode: always
+    password: anchal29
+    url: jdbc:mysql://localhost:3306/alpha?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  redis:
+    host: localhost
+    password: password
+    port: 6379
+zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
+  routes:
+    attendance-service:
+      path: /attendance-api/**
+      serviceId: attendance-service
+    email-service:
+      path: /email-api/**
+      serviceId: email-service
+    exam-service:
+      path: /exam-api/**
+      serviceId: examination-service
+    notification-service:
+      path: /notification-api/**
+      serviceId: notification-service
+    poll-service:
+      path: /poll-api/**
+      serviceId: poll-service
+    question-service:
+      path: /question-api/**
+      serviceId: question-service
+    student-service:
+      path: /student-api/**
+      serviceId: student-service
+    upload-service:
+      path: /upload-api/**
+      serviceId: upload-service
+    user-service:
+      path: /user-api/**
+      serviceId: user-service
+    solr-service:
+      path: /solr-api/**
+      serviceId: solr-service
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 250000

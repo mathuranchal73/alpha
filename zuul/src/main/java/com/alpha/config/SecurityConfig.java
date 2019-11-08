@@ -108,7 +108,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
     	// Allow eureka client and Swagger to be accessed without authentication
-        web.ignoring().antMatchers("/*/","/eureka/**","/v2/api-docs",
+        web.ignoring().antMatchers("/*/","/eureka/**","/actuator/health/*","/actuator/*","/v2/api-docs",
                                    "/configuration/ui",
                                    "/swagger-resources",
                                    "/configuration/security",

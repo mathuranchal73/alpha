@@ -1,1 +1,1 @@
-ERROR | 2019-10-31 14:58:34 | [http-nio-9991-exec-1] client.RestClientImpl (RestClientImpl.java:109) - ba0f32a2-bf45-4c8e-987c-f059b54662d2:Error returning Student Object[Ljava.lang.StackTraceElement;@fbf64ca
+ERROR | 2019-11-04 12:24:48 | [Custom-Executor1] client.RestClientImpl (RestClientImpl.java:110) - null:Error returning Student Object[Ljava.lang.StackTraceElement;@14d6941a

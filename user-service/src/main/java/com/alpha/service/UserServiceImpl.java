@@ -4,6 +4,7 @@ package com.alpha.service;
 import java.util.Collections;
 import java.util.UUID;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -77,22 +79,7 @@ public class UserServiceImpl implements IUserService {
 				user.setActive(false);
 				//Initially setting the user to InActive
 		        user.setRoles(Collections.singleton(userRole));
-		        
-		        ExecutorService executor= Executors.newFixedThreadPool(3);
-		        
-		        Callable<User> task= ()->{
-					
-					return userRepository.save(user);
-					
-				};
-				Future<User> future= executor.submit(task);
-				User result= new User();
-				if(future.isDone())
-				{
-					logger.info(correlationId+":"+ "User Successfully Saved");	
-					result=future.get(4,TimeUnit.SECONDS);
-				}
-				
+				User result= saveUser(user).get(10,TimeUnit.SECONDS);
 					if(result.getRoles().stream().map(role->role.getName().equals("ROLE_SYSTEM")) != null)
 					{
 						
@@ -137,5 +124,12 @@ public class UserServiceImpl implements IUserService {
 			
 		
 	}
+	
+	
+	private CompletableFuture<User> saveUser(User user) throws InterruptedException{
+		return CompletableFuture.completedFuture(userRepository.save(user));
+		
+	}
 
+	
 }
