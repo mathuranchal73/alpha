@@ -2,7 +2,7 @@ app:
   jwtExpirationInMs: 604800000
   jwtSecret: JWTSuperSecretKey
 eureka:
-client:
+  client:
     healthcheck:
       enabled: true
     lease:
@@ -24,15 +24,13 @@ ribbon:
 logging:
   file: ${logging.path}/${spring.application.name}.log
   path: ./logs
-  level: DEBUG
 management:
- endpoint:
-    health:
-      show-details: always
   endpoints:
     web:
       exposure:
         include: '*'
+    health:
+      show-details: always
   security:
     enabled: true
 security:
@@ -41,13 +39,12 @@ security:
 server:
   port: 8086
 spring:
-spring:
   application:
     name: zuul
   boot:
     admin:
       client:
-        password: 4c075273-22c0-4cff-8840-cf569b6bea0e
+        password: 27b0e96c-2444-4a9c-be7e-9f1b7b9d11b6
         url: http://localhost:8761/admin
         username: user
   datasource:

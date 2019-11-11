@@ -38,9 +38,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         if (currentCorrId == null) {
             currentCorrId = UUID.randomUUID().toString();
-            logger.info("No correlationId found in Header. Generated : " + currentCorrId);
+            logger.debug("No correlationId found in Header. Generated : " + currentCorrId);
         } else {
-            logger.info("Found correlationId in Header : " + currentCorrId);
+            logger.debug("Found correlationId in Header : " + currentCorrId);
         }
 
         RequestCorrelation.setId(currentCorrId);

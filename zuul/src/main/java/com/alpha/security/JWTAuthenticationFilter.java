@@ -38,9 +38,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         if (currentCorrId == null) {
             currentCorrId = UUID.randomUUID().toString();
-            logger.info("No correlationId found in Header. Generated : " + currentCorrId);
+            logger.debug("No correlationId found in Header. Generated : " + currentCorrId);
         } else {
-            logger.info("Found correlationId in Header : " + currentCorrId);
+            logger.debug("Found correlationId in Header : " + currentCorrId);
         }
 
         RequestCorrelation.setId(currentCorrId);
@@ -57,10 +57,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 			
-			logger.info("Passing request without Authentication Header");
+			logger.debug("Passing request without Authentication Header");
 			
 		}catch (Exception ex) {
-            logger.error("Could not set user authentication in security context", ex);
+            logger.debug("Could not set user authentication in security context", ex);
             }
 		
 		filterChain.doFilter(request, response);
@@ -70,7 +70,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 	private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken)) {
-        	logger.info("Bearer Token Passed:"+bearerToken);
+        	logger.debug("Bearer Token Passed:"+bearerToken);
             return bearerToken;
         }
         return null;
