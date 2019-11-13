@@ -44,7 +44,7 @@ spring:
   boot:
     admin:
       client:
-        password: 27b0e96c-2444-4a9c-be7e-9f1b7b9d11b6
+        password: 4f1bcc0e-d1ad-43ab-8171-3dc87030ad84
         url: http://localhost:8761/admin
         username: user
   datasource:
@@ -107,4 +107,4 @@ hystrix:
         isolation:
           strategy: THREAD
           thread:
-            timeoutInMilliseconds: 250000
+            timeoutInMilliseconds: 25000
