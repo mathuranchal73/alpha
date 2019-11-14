@@ -58,7 +58,6 @@ public class RestClientImpl implements RestClient {
 	@Value("${system.password")
 	private final String systemPassword="123456";
 	
-	@Async("asyncExecutor")
 	private CompletableFuture<String> getToken(String systemUserId, String systemPassword) throws InterruptedException {
 		
 		 AuthRequest authRequest= new AuthRequest(systemUserId,systemPassword);
@@ -87,7 +86,7 @@ public class RestClientImpl implements RestClient {
 
 	@Override
 	@Async("asyncExecutor")
-	public ResponseEntity<?> postStudentService(HttpServletRequest request,User result) throws InterruptedException, ExecutionException, TimeoutException
+	public CompletableFuture<ResponseEntity<?>> postStudentService(HttpServletRequest request,User result) throws InterruptedException, ExecutionException, TimeoutException
 	{
 		 String correlationId = RequestCorrelation.getId();
 		 HttpHeaders httpHeaders = new HttpHeaders();
@@ -103,12 +102,12 @@ public class RestClientImpl implements RestClient {
 			try {
 				ResponseEntity<?> json = restTemplate.exchange(url,HttpMethod.POST, entity, String.class);
 				logger.info(correlationId+":"+"Posted User details to Event Service");
-				return json;
+				return CompletableFuture.completedFuture(json);
 				 
 			} catch (RestClientException e) 
 			{
 				logger.error(correlationId+":"+"Error returning Student Object"+ e.getStackTrace());
-				return new ResponseEntity<ApiResponse>(new ApiResponse(false,"Error returning Student Object"),HttpStatus.INTERNAL_SERVER_ERROR);
+				return CompletableFuture.completedFuture(new ResponseEntity<ApiResponse>(new ApiResponse(false,"Error returning Student Object"),HttpStatus.INTERNAL_SERVER_ERROR));
 			}
 	}
 	

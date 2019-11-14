@@ -125,7 +125,7 @@ public class UserServiceImpl implements IUserService {
 		
 	}
 	
-	
+	@Async("asyncExecutor")
 	private CompletableFuture<User> saveUser(User user) throws InterruptedException{
 		return CompletableFuture.completedFuture(userRepository.save(user));
 		

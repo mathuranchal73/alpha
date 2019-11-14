@@ -17,6 +17,9 @@ management:
   security:
     enabled: true
 spring:
+  security:
+    user:
+      password: 123456
   boot:
     admin:
       context-path: /admin  #A different context path for Spring boot admin server has been provided avoiding conflict with eureka

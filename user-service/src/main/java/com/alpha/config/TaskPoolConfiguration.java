@@ -26,7 +26,7 @@ public class TaskPoolConfiguration implements AsyncConfigurer {
 		threadPoolTaskExecutor.setCorePoolSize(CORE_POOL_SIZE);
 		threadPoolTaskExecutor.setQueueCapacity(QUEUE_CAPACITY);
 		threadPoolTaskExecutor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-		threadPoolTaskExecutor.setThreadNamePrefix("Custom-Executor");
+		threadPoolTaskExecutor.setThreadNamePrefix("Async-");
 		threadPoolTaskExecutor.initialize();
 		
 		return threadPoolTaskExecutor;

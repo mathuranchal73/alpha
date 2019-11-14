@@ -7,13 +7,21 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.alpha.model.User;
+import com.alpha.service.UserService;
 
 
 @RestController
@@ -23,12 +31,23 @@ public class AuthController {
 
 	@Autowired
 	RestTemplate restTemplete;
+	
+	@Autowired
+	private UserService userService;
 
 	@Bean
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
 
+	
+	@PreAuthorize("#oauth2.hasScope('server')")
+	@RequestMapping(method = RequestMethod.POST)
+	public void createUser(@Valid @RequestBody User user) {
+		userService.create(user);
+	}
+	
+	
 	@RequestMapping(value = "/elk")
 	public String helloWorld() {
 		String response = "Welcome to JavaInUse" + new Date();

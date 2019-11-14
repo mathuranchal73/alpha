@@ -1,5 +1,6 @@
 package com.alpha.web.client;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
@@ -14,6 +15,6 @@ import com.alpha.model.User;
 @Component
 public interface RestClient {
 	
-	ResponseEntity<?> postStudentService(HttpServletRequest request, User result) throws InterruptedException, ExecutionException, TimeoutException;
+	CompletableFuture<ResponseEntity<?>> postStudentService(HttpServletRequest request, User result) throws InterruptedException, ExecutionException, TimeoutException;
 	
 }

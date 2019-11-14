@@ -96,16 +96,16 @@ http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFi
 
 	}
 	
-	 @Override
-	    public void configure(WebSecurity web){
-	    	// Allow eureka client and Swagger to be accessed without authentication
-	        web.ignoring().antMatchers("/*/","/eureka/**","/v2/api-docs",
-	                                   "/configuration/ui",
-	                                   "/swagger-resources",
-	                                   "/configuration/security",
-	                                   "/swagger-ui.html",
-	                                   "/webjars/**")
-	        .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
-	    }
+	@Override
+    public void configure(WebSecurity web) {
+    	// Allow eureka client and Swagger to be accessed without authentication
+        web.ignoring().antMatchers("/*/","/**/*","/eureka/**","/actuator/health/*","/actuator/**/*","/v2/api-docs",
+                                   "/configuration/ui",
+                                   "/swagger-resources",
+                                   "/configuration/security",
+                                   "/swagger-ui.html",
+                                   "/webjars/**")
+        .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
+    }
 
 }

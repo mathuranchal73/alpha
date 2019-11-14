@@ -136,3 +136,18 @@ INFO  | 2019-11-04 11:20:34 | [Custom-Executor1] service.UserServiceImpl (UserSe
 INFO  | 2019-11-04 12:20:22 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
 INFO  | 2019-11-04 12:22:01 | [main] alpha.UserServiceApplication (UserServiceApplication.java:18) - ###### UserServiceApplication Started #####
 INFO  | 2019-11-04 12:23:37 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:88) - af6ca0c0-866b-4a32-80a5-d92e6960b624:Passed Student ADD Event to EventService
+INFO  | 2019-11-14 11:52:47 | [main] alpha.UserServiceApplication (UserServiceApplication.java:19) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 12:00:10 | [main] alpha.UserServiceApplication (UserServiceApplication.java:19) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 12:03:05 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:23:37 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:25:33 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:29:17 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:30:35 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:33:17 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:33:45 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:35:52 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:36:53 | [http-nio-9991-exec-5] service.UserServiceImpl (UserServiceImpl.java:88) - 95967815-5d25-440d-8cc0-ecd39e2b86da:Passed Student ADD Event to EventService
+INFO  | 2019-11-14 14:46:26 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 14:47:52 | [main] alpha.UserServiceApplication (UserServiceApplication.java:23) - ###### UserServiceApplication Started #####
+INFO  | 2019-11-14 16:00:01 | [http-nio-9991-exec-1] service.UserServiceImpl (UserServiceImpl.java:88) - ccf66587-39df-46ba-9d97-bee55ddd3986:Passed Student ADD Event to EventService
+DEBUG | 2019-11-14 16:01:23 | [http-nio-9991-exec-3] service.UserServiceImpl (UserServiceImpl.java:68) - 9c3a4b06-5993-4af1-8e8f-1fb2720054d0:Username is already taken
