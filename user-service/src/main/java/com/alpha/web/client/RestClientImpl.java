@@ -7,7 +7,8 @@ import java.util.concurrent.TimeoutException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -36,7 +37,7 @@ import com.netflix.discovery.shared.Application;
 @Component
 public class RestClientImpl implements RestClient {
 	
-	private static Logger logger = Logger.getLogger(RestClientImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(RestClientImpl.class);
 	
 	@Autowired
     private EurekaClient eurekaClient;

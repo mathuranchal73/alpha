@@ -8,6 +8,7 @@ public class ResourceNotFoundException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 	
+	
 	private String resourceName;
     private String fieldName;
     private Object fieldValue;
@@ -30,5 +31,4 @@ public class ResourceNotFoundException extends RuntimeException {
     public Object getFieldValue() {
         return fieldValue;
     }
-
 }

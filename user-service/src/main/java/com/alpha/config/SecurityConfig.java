@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	        authenticationManagerBuilder
 	                .userDetailsService(customUserDetailsService)
 	                .passwordEncoder(passwordEncoder());
+	         
 	    }
 
 	 
@@ -99,7 +100,7 @@ http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFi
 	@Override
     public void configure(WebSecurity web) {
     	// Allow eureka client and Swagger to be accessed without authentication
-        web.ignoring().antMatchers("/*/","/**/*","/eureka/**","/actuator/health/*","/actuator/**/*","/v2/api-docs",
+        web.ignoring().antMatchers("/*/","/**/*","/eureka/**","/actuator/health/*","/actuator","/actuator/info","/v2/api-docs",
                                    "/configuration/ui",
                                    "/swagger-resources",
                                    "/configuration/security",
@@ -107,5 +108,6 @@ http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFi
                                    "/webjars/**")
         .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
     }
+	
 
 }

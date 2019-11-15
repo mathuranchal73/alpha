@@ -46,14 +46,14 @@ public class AuthServiceImpl implements IAuthService {
         	 
              
 		} catch (DisabledException d) {
-            throw new CustomZuulException("Account Disabled", HttpStatus.UNAUTHORIZED);
+            throw new CustomZuulException(AuthServiceImpl.class, null);
 		}
 		catch ( LockedException l) {
-            throw new CustomZuulException("Account Locked", HttpStatus.UNAUTHORIZED);
+            throw new CustomZuulException(AuthServiceImpl.class, null);
 		}
-		catch ( BadCredentialsException e) {
+		/**catch ( BadCredentialsException e) {
             throw new CustomZuulException("Invalid Username or Password", HttpStatus.UNAUTHORIZED);
-		}
+		}**/
         }
 
 

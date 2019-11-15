@@ -3,7 +3,8 @@ package com.alpha.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ import io.swagger.annotations.ApiResponse;
 @Api(value="User Service", description = "Data service operations on Users", tags=("User"))
 public class UserController {
 	
-	private static Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	IUserService userService;

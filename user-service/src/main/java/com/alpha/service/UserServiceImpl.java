@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,7 @@ import com.alpha.web.client.RestClient;
 @Service
 public class UserServiceImpl implements IUserService {
 	
-	private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+	private static Logger logger= LoggerFactory.getLogger(UserServiceImpl.class);
 	
 	@Autowired
 	UserRepository userRepository;
@@ -72,7 +73,7 @@ public class UserServiceImpl implements IUserService {
 		
 		User user = new User(signUpRequest.getUsername(), passwordEncoder.encode(signUpRequest.getPassword()),UUID.randomUUID().toString()); 
 		  Role userRole = roleRepository.findByName(RoleName.ROLE_SYSTEM)
-	                .orElseThrow(() -> new AppException("User Role not set."));
+	                .orElseThrow(() -> new AppException(UserServiceImpl.class,correlationId));
 
 		  try {
 				//Initially setting the user to InActive
