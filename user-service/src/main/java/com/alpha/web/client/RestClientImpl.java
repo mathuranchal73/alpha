@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -32,6 +33,8 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 
+import brave.sampler.Sampler;
+
 
 
 @Component
@@ -45,7 +48,10 @@ public class RestClientImpl implements RestClient {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	
+	@Bean
+	public Sampler alwaysSampler() {
+	    return Sampler.ALWAYS_SAMPLE;
+	}
 	
 	@Value("${service.zuul.serviceId}")
     private String zuulServiceId;

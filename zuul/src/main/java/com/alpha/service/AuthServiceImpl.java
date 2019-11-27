@@ -1,6 +1,7 @@
 package com.alpha.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Service;
 import com.alpha.payload.JwtAuthenticationResponse;
 import com.alpha.payload.LoginRequest;
 import com.alpha.service.IAuthService;
+
+import brave.sampler.Sampler;
+
 import com.alpha.exception.CustomZuulException;
 import com.alpha.security.JwtTokenProvider;
 
@@ -25,8 +29,6 @@ public class AuthServiceImpl implements IAuthService {
     private JwtTokenProvider jwtTokenProvider;
     @Autowired
     private AuthenticationManager authenticationManager;
-    
-
 	
 	@Override
 	public JwtAuthenticationResponse authenticateUser(LoginRequest loginRequest) {

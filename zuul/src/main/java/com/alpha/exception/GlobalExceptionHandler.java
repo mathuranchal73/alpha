@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.alpha.error.ApiError;
+import com.alpha.web.RequestCorrelation;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,7 +54,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             MissingServletRequestParameterException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
         String error = ex.getParameterName() + " parameter is missing";
-        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST,RequestCorrelation.CORRELATION_ID_HEADER, error, ex));
     }
 	
     /**
@@ -75,7 +76,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         builder.append(ex.getContentType());
         builder.append(" media type is not supported. Supported media types are ");
         ex.getSupportedMediaTypes().forEach(t -> builder.append(t).append(", "));
-        return buildResponseEntity(new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, builder.substring(0, builder.length() - 2), ex));
+        return buildResponseEntity(new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE,RequestCorrelation.CORRELATION_ID_HEADER, builder.substring(0, builder.length() - 2), ex));
     }
 
     /**
@@ -94,6 +95,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
         ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setCorrelationId(RequestCorrelation.CORRELATION_ID_HEADER);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
         apiError.addValidationError(ex.getBindingResult().getGlobalErrors());
@@ -110,6 +112,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleConstraintViolation(
             javax.validation.ConstraintViolationException ex) {
         ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setCorrelationId(RequestCorrelation.CORRELATION_ID_HEADER);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(ex.getConstraintViolations());
         return buildResponseEntity(apiError);
@@ -130,7 +133,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         logger.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
         String error = "Malformed JSON request";
-        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST,RequestCorrelation.CORRELATION_ID_HEADER, error, ex));
     }
 
 	
@@ -146,7 +149,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         String error = "Error writing JSON output";
-        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,RequestCorrelation.CORRELATION_ID_HEADER, error, ex));
     }
 
     /**
@@ -162,6 +165,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleNoHandlerFoundException(
             NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
+        apiError.setCorrelationId(RequestCorrelation.CORRELATION_ID_HEADER);
         apiError.setMessage(String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);
@@ -172,7 +176,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException ex) {
-        return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND,RequestCorrelation.CORRELATION_ID_HEADER, ex));
     }
 
     /**
@@ -187,7 +191,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         if (ex.getCause() instanceof ConstraintViolationException) {
             return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
         }
-        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex));
+        return buildResponseEntity(new ApiError(HttpStatus.INTERNAL_SERVER_ERROR,RequestCorrelation.CORRELATION_ID_HEADER,ex));
     }
 
     /**
@@ -200,6 +204,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex,
                                                                       WebRequest request) {
         ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setCorrelationId(RequestCorrelation.CORRELATION_ID_HEADER);
         apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'", ex.getName(), ex.getValue(), ex.getRequiredType().getSimpleName()));
         apiError.setDebugMessage(ex.getMessage());
         return buildResponseEntity(apiError);

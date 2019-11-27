@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
     
+    
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -109,8 +110,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                    "/swagger-resources",
                                    "/configuration/security",
                                    "/swagger-ui.html",
-                                   "/webjars/**")
-        .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
+                                   "/webjars/**");
+        //.antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
     }
     
     

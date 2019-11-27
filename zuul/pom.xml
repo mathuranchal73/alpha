@@ -18,6 +18,7 @@
 		<java.version>1.8</java.version>
 		<spring-boot-admin.version>2.2.0-SNAPSHOT</spring-boot-admin.version>
 		<spring-cloud.version>Hoxton.M3</spring-cloud.version>
+		<start-class>com.alpha.ZuulApplication</start-class>
 	</properties>
 
 	<dependencies>
@@ -62,6 +63,10 @@
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
 		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -75,7 +80,6 @@
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
-		    <version>1.7.25</version>
 		</dependency>
 		<dependency>
             <groupId>redis.clients</groupId>
@@ -149,6 +153,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+                <fork>true</fork>
+                <executable>C:\Program Files (x86)\Java\jdk1.8.0_181\bin\javac.exe</executable>
+            </configuration>
+        </plugin>
 		</plugins>
 	</build>
 

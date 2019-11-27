@@ -28,6 +28,7 @@ public class ApiError {
 	   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	   private LocalDateTime timestamp;
 	   
+	   private String correlationId;
 	   
 	   private String message;
 	   private String debugMessage;
@@ -37,7 +38,15 @@ public class ApiError {
 	   
 	   
 	   
-	   public HttpStatus getStatus() {
+	   public String getCorrelationId() {
+		return correlationId;
+	}
+
+	public void setCorrelationId(String correlationId) {
+		this.correlationId = correlationId;
+	}
+
+	public HttpStatus getStatus() {
 		return status;
 	}
 
@@ -86,21 +95,24 @@ public class ApiError {
 	       this.status = status;
 	   }
 
-	   public ApiError(HttpStatus status, Throwable ex) {
+	   public ApiError(HttpStatus status, String correlationId, Throwable ex) {
 	       this();
 	       this.status = status;
+	       this.correlationId = correlationId;
 	       this.message = "Unexpected error";
 	       this.debugMessage = ex.getLocalizedMessage();
 	   }
-
-	   public ApiError(HttpStatus status, String message, Throwable ex) {
-	       this();
-	       this.status = status;
-	       this.message = message;
-	       this.debugMessage = ex.getLocalizedMessage();
-	   }
 	   
-	   private void addSubError(ApiSubError subError) {
+	   
+	   public ApiError(HttpStatus status, String correlationId, String message,Throwable ex) {
+		this();
+		this.status = status;
+		this.correlationId = correlationId;
+		this.message = message;
+		this.debugMessage = ex.getLocalizedMessage();
+	}
+
+	private void addSubError(ApiSubError subError) {
 	        if (subErrors == null) {
 	            subErrors = new ArrayList<>();
 	        }
