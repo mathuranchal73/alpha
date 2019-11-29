@@ -21,7 +21,7 @@ public class SwaggerConfig {
 	    public Docket userApi() {
 	        return new Docket(DocumentationType.SWAGGER_2)
 	                .select().apis(RequestHandlerSelectors.basePackage("com.alpha.controller"))
-	                .paths(regex("/v1/user.*"))
+	                .paths(regex("/v1/student.*"))
 	                .build()
 	                .apiInfo(metaData());
 	    }
@@ -29,7 +29,7 @@ public class SwaggerConfig {
 	 	
 	 	private ApiInfo metaData() {
 	        ApiInfo apiInfo = new ApiInfo(
-	                "User Service",
+	                "Student Service",
 	                "Spring Boot REST API ",
 	                "v1.0",
 	                "Terms of service",

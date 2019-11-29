@@ -1,0 +1,58 @@
+app:
+  jwtExpirationInMs: 604800000
+  jwtSecret: JWTSuperSecretKey
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: ${DISCOVERY_URL:http://localhost:8761}/eureka/
+      instance:
+      leaseRenewalIntervalInSeconds: 10
+      securePortEnabled: true
+      nonSecurePortEnabled: false
+      statusPageUrl: http://localhost:${server.port}/info
+      healthCheckUrl: http://localhost:${server.port}/health
+      homePageUrl: http://localhost:${server.port}/
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+server:
+  port: 9992
+service:
+  event-service:
+    serviceId: event-service
+  zuul:
+    serviceId: zuul
+spring:
+  application:
+    name: student-service
+  boot:
+    admin:
+      client:
+        password: 123456
+        url: http://localhost:8761/admin
+        username: user
+  datasource:
+    initialization-mode: always
+    password: anchal29
+    url: jdbc:mysql://localhost:3306/alpha?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  redis:
+    host: localhost
+    password: password
+    port: 6379
+  sleuth:
+    sampler:
+      probability: 1
+  zipkin:
+    base-url: http://localhost:9411/
+    

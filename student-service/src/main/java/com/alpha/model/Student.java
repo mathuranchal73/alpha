@@ -95,7 +95,17 @@ public class Student extends UserDateAudit implements Serializable {
 	 @ApiModelProperty(notes = "Application Specific Code of Referring Source", required = true)
 	 private String source_cd;
 	 
-	 @JsonIgnore
+	 private boolean enabled;
+	 
+	 public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@JsonIgnore
 	 private Instant emailInsertedOn;
 	 
 	 @JsonIgnore
@@ -108,6 +118,37 @@ public class Student extends UserDateAudit implements Serializable {
 	 @ApiModelProperty(notes = "Application Specific UUID of Student", required = true)
 	 private String uuid;
 
+	 public Student() {
+			
+		}
+	 
+	 public Student(String firstName, String lastName, String doa, 
+				String academicSessions,@Size(max = 40) @Email String studentEmail,
+				@NotBlank @Size(max = 40) @Email String parentEmail, @NotBlank @Size(max = 100) String uuid, Boolean enabled) {
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.doa = doa;
+			this.academicSessions = academicSessions;
+			this.studentEmail = studentEmail;
+			this.parentEmail = parentEmail;
+			this.uuid = uuid;
+			this.enabled=enabled;
+		}
+
+		
+		public Student(String firstName, String lastName, String registrationNo,
+				@Size(max = 40) @Email String studentEmail, @NotBlank @Size(max = 40) @Email String parentEmail) {
+			super();
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.registrationNo = registrationNo;
+			this.studentEmail = studentEmail;
+			this.parentEmail = parentEmail;
+		}
+
+	 
+	 
 	public long getId() {
 		return id;
 	}
