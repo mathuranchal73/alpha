@@ -3,7 +3,8 @@ package com.alpha.service;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.alpha.event.StudentEvent;
 
 import com.alpha.model.User;
+import com.alpha.payload.UserRequest;
 import com.alpha.util.ModelMapper;
 import com.alpha.web.ApiResponse;
 import com.alpha.web.RequestCorrelation;
@@ -27,7 +29,7 @@ import com.alpha.web.RequestCorrelation;
 public class EventServiceImpl implements IEventService {
 	
 	
-	private static Logger logger = Logger.getLogger(EventServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
 	
 	@Value("${kafka.topic-name}")
 	private static String TOPIC="amazingTopic";
@@ -44,7 +46,7 @@ public class EventServiceImpl implements IEventService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public ResponseEntity<?> addStudentProfile(HttpServletRequest request,User user) {
+	public ResponseEntity<?> addStudentProfile(HttpServletRequest request,UserRequest user) {
 		
 		try {
 			ProducerRecord<String, StudentEvent> rec = new ProducerRecord<String, StudentEvent>(TOPIC,new StudentEvent(request.getHeader(RequestCorrelation.CORRELATION_ID_HEADER),"ADD",modelMapper.mapUserObjecttoStudent(request, user)));
@@ -54,7 +56,7 @@ public class EventServiceImpl implements IEventService {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(true,"Event Published"),HttpStatus.OK);
 			
 		} catch (Exception e) {
-			logger.error(RequestCorrelation.CORRELATION_ID_HEADER+": Error Encountered in publishing Event:"+e.getStackTrace());
+			logger.error(RequestCorrelation.CORRELATION_ID_HEADER+": Error Encountered in publishing Event:"+e.getLocalizedMessage());
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false,"Error Encountered in Publishing Event in AddStudentProfile"),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		

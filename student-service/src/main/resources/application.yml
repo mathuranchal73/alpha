@@ -20,7 +20,7 @@ logging:
       hibernate:
         SQL: DEBUG
 server:
-  port: 9992
+  port: 9993
 service:
   event-service:
     serviceId: event-service

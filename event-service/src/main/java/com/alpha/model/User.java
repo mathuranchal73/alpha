@@ -69,18 +69,25 @@ public class User{
 	private int loginRetryCount;
 
 	
-	
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(@NotBlank @Size(max = 25) String username, @NotBlank @Size(max = 100) String password,
-			 @NotBlank @Size(max = 100) String uuid) {
+	public User(Long id, @NotBlank @Size(max = 25) String username, @NotBlank @Size(max = 100) String password,
+			@Size(max = 100) String resetPassword, Instant passwordResetAt, @NotNull boolean isActive, Set<Role> roles,
+			@NotBlank @Size(max = 100) String uuid, int loginRetryCount) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.resetPassword = resetPassword;
+		this.passwordResetAt = passwordResetAt;
+		this.isActive = isActive;
+		this.roles = roles;
 		this.uuid = uuid;
+		this.loginRetryCount = loginRetryCount;
 	}
 
 	public Long getId() {

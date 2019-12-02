@@ -85,10 +85,10 @@ public class UserServiceImpl implements IUserService {
 					{
 						
 							try {
-									restClient.postStudentService(request,result);
+									
 									logger.info(correlationId+":"+ "Passed Student ADD Event to EventService");
 									return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Passed Student ADD Event to EventService"),
-						                    HttpStatus.INTERNAL_SERVER_ERROR);
+						                    HttpStatus.OK);
 								} 
 							catch (Exception e)
 								{
