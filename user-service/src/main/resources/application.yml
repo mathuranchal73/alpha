@@ -14,11 +14,6 @@ eureka:
       statusPageUrl: http://localhost:${server.port}/info
       healthCheckUrl: http://localhost:${server.port}/health
       homePageUrl: http://localhost:${server.port}/
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
 server:
   port: 9991
 service:

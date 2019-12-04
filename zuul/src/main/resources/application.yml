@@ -24,6 +24,11 @@ ribbon:
 logging:
   file: ${logging.path}/${spring.application.name}.log
   path: ./logs
+  level:
+   com:
+    alpha: ERROR
+   org:
+    springframework: ERROR
 management:
   endpoints:
     web:

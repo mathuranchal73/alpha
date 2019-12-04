@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
+import com.alpha.web.RequestCorrelation;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
@@ -39,11 +40,11 @@ public class ApiError {
 	   
 	   
 	   public String getCorrelationId() {
-		return correlationId;
+		return RequestCorrelation.CORRELATION_ID_HEADER;
 	}
 
 	public void setCorrelationId(String correlationId) {
-		this.correlationId = correlationId;
+		this.correlationId = RequestCorrelation.CORRELATION_ID_HEADER;
 	}
 
 	public HttpStatus getStatus() {

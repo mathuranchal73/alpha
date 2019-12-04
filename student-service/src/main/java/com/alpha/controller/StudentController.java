@@ -71,7 +71,7 @@ public class StudentController {
 	 StudentServiceImpl studentService;
 	 
 	 @GetMapping("/")
-	 @PreAuthorize("hasRole('TEACHER')")
+	 //@PreAuthorize("hasRole('TEACHER')")
 	 public ArrayList<Student> getAllStudents() {
 	        return studentRepository.findAll();
 	    }

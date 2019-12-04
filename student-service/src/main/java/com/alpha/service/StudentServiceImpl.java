@@ -45,6 +45,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.alpha.model.Student;
 import com.alpha.payload.ApiResponse;
 import com.alpha.payload.CreateStudentRequest;
@@ -56,7 +59,7 @@ import com.alpha.repository.StudentRepository;
 import com.alpha.controller.StudentController;
 import com.alpha.exception.ResourceNotFoundException;
 
-
+@Slf4j
 @Service
 public class StudentServiceImpl implements IStudentService {
 	
