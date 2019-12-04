@@ -21,7 +21,6 @@ public class UserServiceApplication {
 	private static Logger logger = LoggerFactory.getLogger(UserServiceApplication.class);
 	
 	public static void main(String[] args) {
-		logger.info("###### UserServiceApplication Started #####");
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 	

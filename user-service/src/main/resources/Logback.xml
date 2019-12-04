@@ -25,19 +25,17 @@
     <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
   </appender>
   
-  
-  
   <root level="INFO">
     <appender-ref ref="classicConsoleAppender"/>
   </root>
   
-  <logger name="com.alpha" level="ERROR" additivity="false">
+  <logger name="com.alpha" level="DEBUG" additivity="false">
     <appender-ref ref="errorAppender"/>
   </logger>
    <logger name="com.alpha" level="DEBUG" additivity="false">
     <appender-ref ref="debugAppender"/>
   </logger>
-  <logger name="com.alpha" level="INFO" additivity="false">
+  <logger name="com.alpha" level="DEBUG" additivity="false">
    <appender-ref ref="infoAppender"/>
   </logger>
   

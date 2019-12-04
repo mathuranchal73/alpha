@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static net.logstash.logback.argument.StructuredArguments.kv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -61,12 +62,12 @@ public class UserServiceImpl implements IUserService {
         
 		if(request.getHeader("SourceAppCD")==null || request.getHeader("SourceAppCD")=="")
 		{
-			logger.error(correlationId+":"+ "SourceAppCD is empty in Request Header");
+			logger.error("SourceAppCD is empty in Request Header", kv("correlationId", correlationId));
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "SourceAppCD is empty in Request Header"),HttpStatus.BAD_REQUEST);
 		}
 		
 		else if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-			logger.debug(correlationId+":"+ "Username is already taken");
+			logger.debug("Username is already taken", kv("correlationId", correlationId));
             return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
@@ -86,13 +87,13 @@ public class UserServiceImpl implements IUserService {
 						
 							try {
 									
-									logger.info(correlationId+":"+ "Passed Student ADD Event to EventService");
+									logger.info("Passed Student ADD Event to EventService", kv("correlationId", correlationId));
 									return new ResponseEntity<ApiResponse>(new ApiResponse(true, "Passed Student ADD Event to EventService"),
 						                    HttpStatus.OK);
 								} 
 							catch (Exception e)
 								{
-									logger.error(correlationId+":"+ e);
+									logger.error(e.getMessage(), kv("correlationId", correlationId));
 									return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
 						                    HttpStatus.INTERNAL_SERVER_ERROR);
 								}
@@ -107,7 +108,7 @@ public class UserServiceImpl implements IUserService {
 								} 
 							catch (Exception e)
 								{
-									logger.error(correlationId+":"+ e);
+									logger.error(e.getMessage(), kv("correlationId", correlationId));
 									return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving default profile"),
 						                    HttpStatus.INTERNAL_SERVER_ERROR);
 								}
@@ -118,7 +119,7 @@ public class UserServiceImpl implements IUserService {
 					} 
 				catch (Exception e) 
 						{
-							logger.error(correlationId+":"+ e);
+							logger.error(e.getMessage(), kv("correlationId", correlationId));
 							return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Exception occured in saving User"),
 				                    HttpStatus.INTERNAL_SERVER_ERROR);
 						}

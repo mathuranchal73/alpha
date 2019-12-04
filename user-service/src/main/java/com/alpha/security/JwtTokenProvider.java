@@ -1,5 +1,7 @@
 package com.alpha.security;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 import java.util.Base64;
 
 import javax.annotation.PostConstruct;
@@ -10,7 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.alpha.security.JwtTokenProvider;
-
+import com.alpha.web.RequestCorrelation;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -47,7 +49,7 @@ private static final String REDIS_SET_ACTIVE_SUBJECTS = "active-subjects";
                 .setSigningKey(jwtSecret)
                 .parseClaimsJws(token)
                 .getBody();
-        logger.info("Parsed UserId:"+claims.getSubject());
+        logger.debug("Parsed User Details",kv("claims",claims), kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         return Long.parseLong(claims.getSubject());
     }
     
@@ -58,15 +60,15 @@ private static final String REDIS_SET_ACTIVE_SUBJECTS = "active-subjects";
         	
 
         } catch (SignatureException ex) {
-            logger.error("Invalid JWT signature");
+            logger.error("Invalid JWT signature",kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token");
+            logger.error("Invalid JWT token",kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token");
+            logger.error("Expired JWT token",kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token");
+            logger.error("Unsupported JWT token",kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty.");
+            logger.error("JWT claims string is empty.",kv("correlationId", RequestCorrelation.CORRELATION_ID_HEADER));
         }
         return false;
     }

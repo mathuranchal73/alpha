@@ -1,5 +1,7 @@
 package com.alpha.security;
 
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 import java.io.IOException;
 import java.util.UUID;
 
@@ -38,9 +40,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         if (currentCorrId == null) {
             currentCorrId = UUID.randomUUID().toString();
-            logger.debug("No correlationId found in Header. Generated : " + currentCorrId);
+            logger.debug("No correlationId found in Header",kv("correlationId",currentCorrId));
         } else {
-            logger.debug("Found correlationId in Header : " + currentCorrId);
+            logger.debug("Found correlationId in Header",kv("correlationId",currentCorrId));
         }
 
         RequestCorrelation.setId(currentCorrId);
@@ -57,10 +59,10 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 			}
 			
-			logger.info("Passing request without Authentication Header");
+			logger.info("Passing request without Authentication Header",kv("correlationId",currentCorrId));
 			
 		}catch (Exception ex) {
-            logger.error("Could not set user authentication in security context", ex);
+            logger.error("Could not set user authentication in security context", kv("Exception",ex.getMessage()));
             }
 		
 		filterChain.doFilter(request, response);
@@ -70,7 +72,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 	private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken)) {
-        	logger.info("Bearer Token Passed:"+bearerToken);
+        	logger.info("Bearer Token Passed",kv("HttpRequest",request));
             return bearerToken;
         }
         return null;
