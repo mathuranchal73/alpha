@@ -2,9 +2,7 @@
 
 <property name="FILE_PATH" value="logs" />
 
-	
-	
-  <appender name="classicConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+		 <appender name="classicConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
         <pattern>%d %green([%thread]) %highlight(%level) %logger{50} - %msg%n</pattern>
     </encoder>
