@@ -1,0 +1,33 @@
+server:
+  port: 8112
+spring:
+  application:
+    name: reservation-service
+  data:
+    mongodb:
+      database: alpha
+      host: localhost
+      port: 27017
+      datasource:
+        driver-class-name: mongodb.jdbc.MongoDriver
+  datasource:
+    initialization-mode: always
+    password: anchal29
+    url: jdbc:mysql://localhost:3306/alpha2?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    sleuth:
+      sampler:
+      probability: 1
+    zipkin:
+      base-url: http://localhost:9411/
+    
