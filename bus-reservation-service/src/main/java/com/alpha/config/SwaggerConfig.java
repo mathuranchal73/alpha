@@ -46,9 +46,9 @@ public class SwaggerConfig {
 	@Bean
     public Docket BusReservationApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("BRS")
+                .groupName("Bus-Reservation Service")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.alpha.controller.v1.api"))
+                .apis(RequestHandlerSelectors.basePackage("com.alpha"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
