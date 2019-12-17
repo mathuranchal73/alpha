@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.alpha.service;
 
 import java.io.File;
@@ -15,8 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.alpha.dto.GeoLocation;
+import com.alpha.dto.UserAgentDetails;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.model.CityResponse;
+
+import eu.bitwalker.useragentutils.UserAgent;
+
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 
 import static java.util.Objects.nonNull;
@@ -55,41 +56,57 @@ public class VisitorServiceImpl implements VisitorService {
 	}
 
 
+	private static final String[] IP_HEADER_CANDIDATES = { 
+		    "X-Forwarded-For",
+		    "Proxy-Client-IP",
+		    "WL-Proxy-Client-IP",
+		    "HTTP_X_FORWARDED_FOR",
+		    "HTTP_X_FORWARDED",
+		    "HTTP_X_CLUSTER_CLIENT_IP",
+		    "HTTP_CLIENT_IP",
+		    "HTTP_FORWARDED_FOR",
+		    "HTTP_FORWARDED",
+		    "HTTP_VIA",
+		    "REMOTE_ADDR" };
+
+
+	public  String  extractIpAddress(HttpServletRequest request) {
+		for (String header : IP_HEADER_CANDIDATES) {
+	        String ip = request.getHeader(header);
+	        if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+	            return ip;
+	        }
+	    }
+	    return request.getRemoteAddr();
+		
+		
+	}
+
+	        
+
+
+   /** private String parseXForwardedHeader(String header) {
+        return header.split(" *, *")[0];
+    }**/
+
+
 
 
 	@Override
-	 public Map<String, String>  extractIpAddress(HttpServletRequest request) {
-        /**String clientIp;
-        String clientXForwardedForIp = request.getHeader("x-forwarded-for");
-        if (nonNull(clientXForwardedForIp)) {
-           // clientIp = parseXForwardedHeader(clientXForwardedForIp);
-        	//clientIp=clientXForwardedForIp;
-        	clientIp=request.getRemoteAddr();
-        } else {
-            clientIp = request.getRemoteAddr();
-        }
-
-        return clientIp;**/
+	public UserAgentDetails getUserAgentDetails(HttpServletRequest request) {
 		
+		UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+		System.out.println(userAgent.getBrowser().getName() + " " + userAgent.getBrowserVersion());
+		String browserName= userAgent.getBrowser().getName();
+		String browserVersion=userAgent.getBrowserVersion().getMajorVersion();
+		String engineName=userAgent.getBrowser().getRenderingEngine().getName();
+		String osName=userAgent.getOperatingSystem().getName();
+		int osVersion=userAgent.getOperatingSystem().getId();
+		String deviceModel=userAgent.getOperatingSystem().getManufacturer().getName();
+		String deviceType=userAgent.getOperatingSystem().getDeviceType().getName();
 		
-	
-
-	        Map<String, String> result = new HashMap<>();
-
-	        Enumeration headerNames = request.getHeaderNames();
-	        while (headerNames.hasMoreElements()) {
-	            String key = (String) headerNames.nextElement();
-	            String value = request.getHeader(key);
-	            result.put(key, value);
-	        }
-
-	        return result;
-	    }
-
-
-    private String parseXForwardedHeader(String header) {
-        return header.split(" *, *")[0];
-    }
+		return new UserAgentDetails(browserName,browserVersion,engineName,osName,osVersion,deviceModel,deviceType);
+	}
 	
 	
 	

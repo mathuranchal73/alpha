@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.util.MultiValueMap;
 
 import com.alpha.dto.GeoLocation;
+import com.alpha.dto.UserAgentDetails;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 
 /**
@@ -28,11 +29,21 @@ public interface VisitorService {
 	 */
 	GeoLocation getGeoLocationFromIpAddress(InetAddress ipAddress) throws IOException, GeoIp2Exception;
 
+	
+	
 	/**
 	 * @param request
 	 * @return
 	 */
-	Map<String, String> extractIpAddress(HttpServletRequest request);
+	UserAgentDetails getUserAgentDetails(HttpServletRequest request);
+
+
+
+	/**
+	 * @param request
+	 * @return
+	 */
+	String extractIpAddress(HttpServletRequest request);
 	
 	
 

@@ -47,12 +47,12 @@ public class VisitorController {
         
     }
 	
-	/**@GetMapping("/useragents/{userAgent}")
+	@GetMapping("/getUserAgentDetails")
     @ApiOperation(value = "", authorizations = {@Authorization(value = "apiKey")})
-    public ResponseEntity<?> getGeoLocation(@PathVariable String ipAddress) throws IOException, GeoIp2Exception {
-        return new ResponseEntity(visitorService.getGeoLocationFromIpAddress(InetAddress.getByName(ipAddress)),HttpStatus.OK);
+    public ResponseEntity<?> getUserAgentDetails(HttpServletRequest request){
+        return new ResponseEntity(visitorService.getUserAgentDetails(request),HttpStatus.OK);
         
     }
-	**/
+	
 
 }
